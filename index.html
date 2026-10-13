@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="学習アプリ">
+<title>学習アプリ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--pink:#5F7F86;--pink-d:#43626A;--petal:#E3ECEC;--blush:#F4F6F6;--line:#D2DDDD;--ink:#26333A;--sub:#6C7C80;--wr:#B5532F}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
+body{font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Hiragino Kaku Gothic ProN',sans-serif;background:var(--blush);color:var(--ink);font-size:15px;line-height:1.6;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;touch-action:manipulation}
+#app{position:fixed;top:0;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-5px}
+header{background:var(--pink);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 12px) 20px 24px}
+.hrow{display:flex;align-items:center;gap:4px;height:40px}
+.brand{font-size:12px;font-weight:700;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hbtn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;background:none;border:0;padding:0;margin:0 0 0 -10px}.hbtn:active{background:rgba(255,255,255,.18)}
+header h1{margin:6px 0 0;font-size:28px;font-weight:900;line-height:1.25;word-break:break-word}
+main{padding:22px 16px calc(96px + env(safe-area-inset-bottom,0px))}
+.welcome{padding:calc(env(safe-area-inset-top,0px) + 48px) 22px 40px}.welcome h1{font-size:30px;font-weight:900;margin:0 0 6px;color:var(--pink)}.welcome p{color:var(--sub);margin:0 0 28px}
+.cd{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.cd>b:first-child{display:block;margin-bottom:6px;font-size:15px;font-weight:900}
+button{font:inherit;font-size:13px;font-weight:700;color:var(--pink-d);background:transparent;border:1.5px solid var(--line);border-radius:12px;padding:9px 14px;margin:3px 0;max-width:100%;cursor:pointer}
+button.on{background:var(--pink);border-color:var(--pink);color:#fff}
+button.pri{background:var(--pink);border-color:var(--pink);color:#fff;font-size:15px;padding:13px 18px;border-radius:14px}button.pri:active{background:var(--pink-d)}
+.cd>button.pri{display:block;width:100%}
+input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--blush);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;margin:3px 0;outline:none;-webkit-appearance:none;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%236C7C80' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+input:focus,select:focus,textarea:focus{border-color:var(--pink);background:#fff}
+input[type=checkbox]{width:auto;-webkit-appearance:auto;appearance:auto;margin:0}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav .in{max-width:560px;margin:0 auto;display:flex}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;border:0;border-radius:0;margin:0;padding:9px 0 8px;font-size:11px;font-weight:700;color:var(--sub);background:none}
+nav button.on{color:var(--pink);background:none}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mu,small{color:var(--sub)}small{font-size:12px}
+.big{font-size:34px;font-weight:900;text-align:center;font-variant-numeric:tabular-nums;line-height:1.3}.big small{font-size:15px;font-weight:500}
+.bar{display:block;height:6px;background:var(--petal);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pink);border-radius:6px}
+.li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 2px;border-top:1px solid var(--petal);flex-wrap:wrap}.li small{width:100%}
+.wr{border-color:var(--wr)}.wr b{color:var(--wr)}
+.tb{width:100%;border-collapse:collapse;font-size:13px}.tb th{font-weight:500;color:var(--sub);text-align:left;padding:4px 0}.tb td{padding:6px 0;border-top:1px solid var(--petal);font-variant-numeric:tabular-nums}
+.gr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.gr svg,.gr img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;display:block}
+.br{display:grid;grid-template-columns:84px 1fr 52px;gap:8px;align-items:center;margin:6px 0;font-size:13px}.br i{height:100%}.br b{text-align:right}
+.ro .ed{display:none}
+label{display:flex;gap:8px;align-items:center;font-size:13px;padding:3px 0}
+#t{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;opacity:0;transition:opacity .2s;pointer-events:none;max-width:92%;z-index:200}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></symbol>
+<symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v14c-3-1-6-1-8 1-2-2-5-2-8-1z"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v10H3z"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="11" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16" cy="11" r="1"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 018-3 4.5 4.5 0 018 3c0 6-8 11-8 11z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1 4 5 5 5 10a5 5 0 01-10 0c0-3 2-4 2-6 1 1 2 1 3-4z"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v6M12 15v6M3 12h6M15 12h6M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 12v8h14v-8"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/></symbol>
+</defs></svg>
+<div id="app"></div><nav id="n"></nav><div id="t"></div>
+<script>
+// ★ GASをデプロイして発行されたウェブアプリのURLを、ここに貼ってください
+const API_URL='https://script.google.com/macros/s/AKfycbyQvzO1HrZGvfDRRujArQ85YJZmNQKCSUOdXwHtZ1_OnlCvqnuWiRP7uCZYkjh7y2tl/exec';
+
+const $=s=>document.querySelector(s),E=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),Q=i=>(document.getElementById(i)||{value:''}).value.trim();
+const ic=n=>`<svg class="ic" viewBox="0 0 24 24"><use href="#i-${n}"/></svg>`;
+const LS={g:k=>{try{return localStorage.getItem(k)||''}catch(e){return ''}},s:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+const toast=(m,ms)=>{const t=$('#t');t.textContent=m;t.style.opacity=1;clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.opacity=0,ms||2800)};
+let busy=0;
+const w=f=>async(...a)=>{if(busy)return;busy=1;toast('通信中…',30000);try{await f(...a);if($('#t').textContent=='通信中…')$('#t').style.opacity=0}catch(e){toast((e.name=='AbortError'?'通信がタイムアウトしました。電波を確認して、もう一度お試しください':e.message)||'エラーが発生しました',7000)}finally{busy=0}};
+async function api(act,o){if(!/^https/.test(API_URL))throw new Error('index.html の API_URL にGASのURLを貼ってください');const ac=new AbortController(),tid=setTimeout(()=>ac.abort(),25000);try{const r=await fetch(API_URL,{method:'POST',body:JSON.stringify(Object.assign({act,key:S.key},o||{})),signal:ac.signal}),x=await r.text();let j;try{j=JSON.parse(x)}catch(e){throw new Error('GASの応答が正しくありません。デプロイの「アクセスできるユーザー」が全員か確認してください')}if(!j.ok)throw new Error(j.e);return j.d}finally{clearTimeout(tid)}}
+const S={key:LS.g('ga_key'),code:'',name:'',me:null},PM={};let D={},st={scr:'boot',tab:'proj',P:null,pt:'home',pd:'week',ch:'pie',os:0,op:-1,msg:''};
+const today=()=>{const n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate())},ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const dyo=r=>{const a=r.d.split('-');return Math.round((today()-new Date(+a[0],a[1]-1,+a[2]))/864e5)};
+const COL=['#5f8087','#c19a4a','#7d9a6b','#a26b7e'];
+const standalone=()=>navigator.standalone===true||(!!window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
+const inv=()=>new URLSearchParams(location.search).get('inv')||LS.g('ga_inv');
+
+// ---------- 起動・アカウント ----------
+const boot=async()=>{try{const iv=new URLSearchParams(location.search).get('inv');if(iv)LS.s('ga_inv',iv.toUpperCase());const sk=LS.g('ga_skin');if(sk)document.documentElement.style.setProperty('--ac',sk);
+if(S.key){await loadMe();st.scr='top'}else st.scr=(standalone()||location.search.includes('dev'))?'reg':'guide';draw()}catch(e){st.scr='err';st.err=(e.name=='AbortError'?'通信がタイムアウトしました':e.message)||String(e);draw()}};
+async function loadMe(){S.me=await api('me');S.code=S.me.code;S.name=S.me.name;S.me.projects.forEach(p=>PM[p.id]=Object.assign({ro:0,owner:S.name},p));S.me.friends.forEach(f=>f.projects.forEach(p=>PM[p.id]=Object.assign({ro:1,owner:f.name},p)))}
+const reg=w(async()=>{const d=await api('register',{name:Q('rn'),inv:Q('ri')});S.key=d.key;LS.s('ga_key',d.key);LS.s('ga_inv','');await loadMe();st.scr='top';st.tab='proj';draw();toast(Q('ri')?'アカウントを作成し、フレンドになりました':'アカウントを作成しました')});
+const vGuide=()=>`<div class="cd"><b>はじめに</b><p>${inv()?'招待リンクから開きました。次の手順で始めると、フレンドになった状態で使えます。':'次の手順で始めましょう。'}</p>
+${[['share','画面の共有ボタンをタップ'],['plus','「ホーム画面に追加」をタップ'],['home','ホーム画面のアイコンから開き直す']].map((x,i)=>`<div class="li"><span>${ic(x[0])}&nbsp; ${i+1}. ${x[1]}</span></div>`).join('')}<small>ホーム画面から開くと、アカウント作成の画面が出ます。ブラウザのままだと、アカウントが引き継がれません。</small></div>`;
+const vReg=()=>`<div class="cd"><b>アカウントを作成</b><input id="rn" placeholder="表示名" maxlength="20"><input id="ri" placeholder="招待コード（お持ちの場合）" value="${E(inv())}"><button class="pri" onclick="reg()">作成する</button><p><small>作成するだけで、招待してくれた人とフレンドになります。</small></p></div>`;
+
+// ---------- 画面の枠 ----------
+const nb=(k,i,l,cur,fn)=>`<button class="${k==cur?'on':''}" onclick="${fn}">${ic(i)}${l}</button>`;
+const TA=[['home','home','ホーム'],['timer','timer','タイマー'],['rec','pencil','記録'],['ana','chart','分析']],TC=[['home','home','ホーム'],['unit','book','単元'],['cook','pencil','調理']];
+function draw(f){const P=st.P;let h='',n='',br='',tt='',bk='';
+if(st.scr=='err'){$('#app').innerHTML=`<div class="welcome"><h1>学習アプリ</h1><p>読み込めませんでした</p><div class="cd wr"><b>エラー</b>${E(st.err)}</div><button class="pri" onclick="location.reload()">再読み込み</button></div>`;$('#n').style.display='none';return}
+if(st.scr=='guide'||st.scr=='reg'){$('#app').innerHTML=`<div class="welcome"><h1>学習アプリ</h1><p>${st.scr=='guide'?'はじめにホーム画面へ追加します':'アカウントを作成します'}</p>${st.scr=='guide'?vGuide():vReg()}</div>`;$('#n').style.display='none';return}
+if(!P){br='学習アプリ ・ '+S.name;tt={proj:'プロジェクト',skin:'着せ替え',pay:'応援'}[st.tab];h=({proj:vProj,skin:vSkin,pay:vPay})[st.tab]();n=[['proj','folder','プロジェクト'],['skin','palette','着せ替え'],['pay','heart','応援']].map(x=>nb(x[0],x[1],x[2],st.tab,`st.tab='${x[0]}';draw(1)`)).join('')}
+else{br=(P.type=='a'?'天文・物理型':'料理型')+(P.ro?' ・ '+P.owner+'さん（閲覧のみ）':'');tt=P.name;bk=`<button class="hbtn" onclick="st.P=null;draw(1)">${ic('back')}</button>`;h=(P.type=='a'?AV:CV)[st.pt]()+stampBox();n=(P.type=='a'?TA:TC).map(x=>nb(x[0],x[1],x[2],st.pt,`st.pt='${x[0]}';draw(1)`)).join('')}
+$('#app').innerHTML=`<header><div class="hrow">${bk}<span class="brand">${E(br)}</span></div><h1>${E(tt)}</h1></header><main class="${P&&P.ro?'ro':''}">${h}</main>`;
+$('#n').innerHTML='<div class="in">'+n+'</div>';$('#n').style.display=n?'block':'none';if(f)$('#app').scrollTop=0}
+const vProj=()=>{const m=S.me,link=location.origin+location.pathname+'?inv='+S.code,pr=p=>`<div class="li"><span>${E(p.name)}<small> ${p.type=='a'?'天文・物理型':'料理型'}</small></span><button onclick="openP('${p.id}')">開く</button></div>`;
+return `<div class="cd"><b>自分のプロジェクト</b>${m.projects.map(pr).join('')||'<p class="mu">まだありません</p>'}<select id="nt"><option value="a">天文・物理型</option><option value="c">料理型</option></select><input id="nn" placeholder="プロジェクト名"><button class="pri" onclick="mkP()">${ic('plus')} 作成する</button></div>
+${m.friends.map(f=>`<div class="cd"><b>${E(f.name)}さんのプロジェクト（閲覧のみ）</b>${f.projects.map(pr).join('')||'<p class="mu">まだありません</p>'}</div>`).join('')}
+<div class="cd"><b>フレンドを追加</b><input id="fc" placeholder="相手のフレンドコード"><button onclick="addF()">申請する</button></div>
+<div class="cd"><b>あなたのフレンドコードと招待リンク</b><div class="big" style="font-size:28px;letter-spacing:4px">${E(S.code)}</div><small>${E(link)}</small><div class="row"><button onclick="cp('${E(link)}')">${ic('copy')} 招待リンクをコピー</button></div><small>このリンクから入った人は、自動でフレンドになります。</small></div>`};
+const cp=s=>{try{navigator.clipboard.writeText(s).then(()=>toast('コピーしました'),()=>toast('コピーできませんでした'))}catch(e){toast('コピーできませんでした')}};
+const mkP=w(async()=>{await api('newProject',{type:Q('nt'),name:Q('nn')});await loadMe();draw();toast('作成しました')});
+const addF=w(async()=>{await api('addFriend',{code:Q('fc')});await loadMe();draw();toast('フレンドになりました')});
+const SKN=[['標準（くすみブルー）',''],['若葉','#6b8e6b'],['夕霧','#8a7a9b'],['琥珀','#b08a4a']];
+const vSkin=()=>`<div class="cd"><b>着せ替え</b><small>画像は用意でき次第、ここに追加します。今は色だけ変えられます。</small>${SKN.map((s,i)=>`<div class="li" onclick="skn(${i})" style="cursor:pointer"><span>${s[0]}</span><svg viewBox="0 0 60 24" width="60"><rect width="60" height="24" rx="6" fill="${s[1]||'#5f8087'}"/></svg></div>`).join('')}</div>`;
+const skn=i=>{LS.s('ga_skin',SKN[i][1]);if(SKN[i][1])document.documentElement.style.setProperty('--ac',SKN[i][1]);else document.documentElement.style.removeProperty('--ac');draw()};
+const vPay=()=>`<div class="cd" style="text-align:center"><b>応援（任意の募金）</b><img src="paypay.png" alt="PayPay QR" style="max-width:200px;width:100%" onerror="this.outerHTML='<p class=&quot;mu&quot;>paypay.png をこのフォルダに置くと、ここにQRコードが表示されます。</p>'"><p class="mu">アプリを気に入ってもらえたら、応援してもらえると嬉しいです。</p></div>`;
+const openP=w(async id=>{st.P=PM[id];st.pt='home';D={};await Promise.all((st.P.type=='a'?['record','goal']:['level','cook']).map(ld));D.stp=await api('stamps',{proj:id});draw(1)});
+const ld=async s=>{D[s]=await api('list',{proj:st.P.id,sheet:s})};
+const put=async(s,row)=>{await api('put',{proj:st.P.id,sheet:s,row});await ld(s)};
+const STP={good:['heart','いいね'],nice:['star','ナイス'],cheer:['flame','がんばれ'],wow:['spark','すごい']};
+const stampBox=()=>{const P=st.P,l=D.stp||[];if(!P.ro&&!l.length)return '';return `<div class="cd"><b>応援スタンプ</b>${P.ro?`<div class="row">${Object.keys(STP).map(k=>`<button onclick="sendS('${k}')">${ic(STP[k][0])} ${STP[k][1]}</button>`).join('')}</div>`:''}${l.slice(0,5).map(x=>`<div class="li"><span>${ic(STP[x.stamp]?STP[x.stamp][0]:'heart')} ${E(x.from)}さん</span><small>${STP[x.stamp]?STP[x.stamp][1]:''}</small></div>`).join('')}</div>`};
+const sendS=w(async k=>{await api('stamp',{proj:st.P.id,stamp:k});D.stp=await api('stamps',{proj:st.P.id});draw();toast('スタンプを送りました')});
+
+// ---------- 天文・物理型 ----------
+const SUBJ=['天文学','物理学','数学'],PRE=[['スタート',10,3],['標準',25,5],['集中',50,10],['長時間',90,15]],RS=()=>D.record||[];
+const agg=rs=>SUBJ.map(s=>{const r=rs.filter(x=>x.s==s),m=r.reduce((a,x)=>a+x.m,0);return{s,m,u:r.length?r.reduce((a,x)=>a+x.u,0)/r.length:0}}).filter(x=>x.m>0);
+const gl=()=>{const g=(D.goal||[]).find(x=>x.k=='day');return g?g.v:90};
+const al=rs=>{const a=agg(rs),t=a.reduce((x,y)=>x+y.m,0),o=[];a.forEach(x=>{if(a.length>1&&x.m/t>.6)o.push(`${x.s}が直近7日の${Math.round(x.m/t*100)}%を占めています。他の科目も入れてみましょう。`);if(x.u<=2.5&&x.m>=30)o.push(`${x.s}は学習時間のわりに理解度が低めです。基礎問題で確認してみましょう。`)});return o};
+const pie=d=>{const t=d.reduce((a,x)=>a+x.m,0);if(d.length<2)return `<svg viewBox="-60 -60 120 120" width="150"><circle r="60" fill="${COL[0]}"/></svg>`;let a=-Math.PI/2;return `<svg viewBox="-60 -60 120 120" width="150">${d.map((x,i)=>{const b=a+x.m/t*2*Math.PI,p=`M0 0L${60*Math.cos(a)} ${60*Math.sin(a)}A60 60 0 ${b-a>Math.PI?1:0} 1 ${60*Math.cos(b)} ${60*Math.sin(b)}Z`;a=b;return `<path d="${p}" fill="${COL[i%4]}"/>`}).join('')}</svg>`};
+const AV={};
+AV.home=()=>{const all=RS(),td=all.filter(r=>dyo(r)==0),t=td.reduce((a,x)=>a+x.m,0),g=gl(),p=Math.min(100,Math.round(t/g*100));return `<div class="cd"><b>今日の学習</b><div class="big">${t}<small> / ${g}分</small></div><span class="bar"><i style="width:${p}%"></i></span><p class="mu">達成率 ${p}% ・ 学習分野 ${agg(td).length}</p><div class="row ed"><input id="gv" type="number" value="${g}" style="width:90px"><button onclick="saveG()">目標を変更</button></div><small class="ed">達成できないときは、目標を下げて続けることを優先します。</small></div>${al(all.filter(r=>dyo(r)<7)).map(x=>`<div class="cd wr"><b>偏りのお知らせ</b>${x}</div>`).join('')}<div class="row ed"><button class="pri" onclick="st.pt='timer';draw(1)">勉強を始める</button><button onclick="st.pt='rec';draw(1)">学習を記録する</button></div>`};
+const saveG=w(async()=>{const g=(D.goal||[]).find(x=>x.k=='day');await put('goal',{id:g?g.id:undefined,k:'day',v:+Q('gv')||90});draw()});
+AV.rec=()=>`<div class="cd ed"><b>学習を記録</b>${st.msg?`<p class="wr"><b>${st.msg}</b></p>`:''}<select id="rs">${SUBJ.map(s=>`<option>${s}</option>`).join('')}</select><input id="rc" placeholder="カテゴリー（例：恒星）"><input id="rt" placeholder="テーマ（例：恒星の進化）"><input id="rm" type="number" min="1" placeholder="学習時間（分）"><input id="rn" placeholder="学習内容・メモ"><select id="ru">${[5,4,3,2,1].map(n=>`<option value="${n}">理解度 ${n}/5</option>`).join('')}</select><button class="pri" onclick="addRec()">記録する</button></div><div class="cd"><b>履歴</b>${RS().slice().sort((a,b)=>b.d>a.d?1:-1).slice(0,30).map(r=>`<div class="li"><span>${E(r.s)}・${E(r.th)}</span><b>${r.m}分</b><small>${E(r.d)} ・ 理解度 ${r.u}/5 ・ ${E(r.src||'手動')} ${E(r.memo||'')}</small></div>`).join('')||'<p class="mu">まだ記録がありません</p>'}</div>`;
+const addRec=w(async()=>{const m=+Q('rm'),s=Q('rs');if(!m)return;if(RS().some(x=>x.src=='タイマー'&&dyo(x)==0&&x.s==s&&x.m==m)&&st.msg===''){st.msg='同じ科目・時間のタイマー実績があります。二重計上でなければ、もう一度押してください。';draw();return}st.msg='';await put('record',{d:ymd(today()),s,c:Q('rc'),th:Q('rt')||'-',m,u:+Q('ru'),memo:Q('rn'),src:'手動'});draw();toast('記録しました')});
+const tm={pi:1,sec:1500,tot:1500,tb:0,run:0,el:0,ph:'s',subj:'天文学',done:null,msg:''};let tmr=0;
+const fm=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function beep(){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator();o.connect(c.destination);o.frequency.value=880;o.start();setTimeout(()=>{o.stop();c.close()},350)}catch(e){}try{navigator.vibrate&&navigator.vibrate(250)}catch(e){}try{window.Notification&&Notification.permission=='granted'&&new Notification(tm.msg)}catch(e){}}
+function tpre(i){if(tm.run)return;tm.pi=i;tm.ph='s';tm.sec=tm.tot=PRE[i][1]*60;tm.el=0;tm.msg='';draw()}
+function ttg(){if(tm.run){clearInterval(tmr);tm.run=0}else{tm.run=1;tmr=setInterval(tick,1000)}draw()}
+function tick(){if(tm.sec>0){tm.sec--;if(tm.ph=='s')tm.el++}if(tm.ph=='s'&&tm.sec==60){tm.msg='あと1分で終了します';beep();draw();return}tup();if(tm.sec<=0)tend()}
+function tup(){const a=$('#tt');if(a){a.textContent=fm(tm.sec);$('#tbar').style.width=(100-tm.sec/(tm.ph=='s'?tm.tot:tm.tb||1)*100)+'%'}}
+function tend(){if(tm.ph=='s'){tm.done=Math.floor(tm.el/60)||null;tm.el=0;tm.ph='b';tm.sec=tm.tb=PRE[tm.pi][2]*60;tm.msg='勉強終了。休憩を始めます'}else{clearInterval(tmr);tm.run=0;tm.ph='s';tm.sec=tm.tot;tm.msg='休憩終了。次の勉強を始められます'}beep();draw()}
+function tfin(){clearInterval(tmr);tm.run=0;const m=Math.floor(tm.el/60);tm.done=m>0?m:null;tm.ph='s';tm.sec=tm.tot=PRE[tm.pi][1]*60;tm.el=0;tm.msg='';draw()}
+function tskip(){if(!tm.run)ttg();const d=Math.min(300,tm.sec);if(tm.ph=='s')tm.el+=d;tm.sec-=d;tup();if(tm.sec<=0)tend()}
+const tsave=w(async u=>{await put('record',{d:ymd(today()),s:tm.subj,c:'',th:'タイマー',m:tm.done,u,src:'タイマー'});tm.done=null;draw();toast('実績を保存しました')});
+AV.timer=()=>{const t0=tm.ph=='s'?tm.tot:tm.tb||1;return `<div class="cd ed"><div class="row">${PRE.map((p,i)=>`<button class="${tm.pi==i?'on':''}" onclick="tpre(${i})">${p[0]}<small> ${p[1]}/${p[2]}</small></button>`).join('')}</div><select onchange="tm.subj=this.value">${SUBJ.map(s=>`<option ${s==tm.subj?'selected':''}>${s}</option>`).join('')}</select><p class="mu" style="text-align:center;margin:8px 0 0">${tm.ph=='s'?'勉強中':'休憩中'}</p><div class="big" id="tt" style="font-size:52px">${fm(tm.sec)}</div><span class="bar"><i id="tbar" style="width:${100-tm.sec/t0*100}%"></i></span><p class="mu">休憩は学習時間に含めません。中断した場合は、実際に学んだ分だけ記録します。</p>${tm.msg?`<p class="wr"><b>${tm.msg}</b></p>`:''}<div class="row"><button class="pri" onclick="ttg()">${tm.run?'一時停止':'開始'}</button><button onclick="tfin()">終了して記録</button><button onclick="tskip()">5分進める</button></div><small>画面ロック中の通知は、ホーム画面に追加したアプリで動作確認が必要です。</small></div>${tm.done!=null?`<div class="cd ed"><b>${tm.done}分 学習しました</b>理解度は？<div class="row">${[1,2,3,4,5].map(n=>`<button onclick="tsave(${n})">${n}</button>`).join('')}</div></div>`:''}`};
+AV.ana=()=>{const PD=[['today','今日',1],['week','今週',7],['month','今月',30],['year','今年',365],['all','全期間',9999]],n=PD.find(x=>x[0]==st.pd)[2],rs=RS().filter(r=>dyo(r)<n),a=agg(rs),days=new Set(RS().map(dyo));let sk=0;while(days.has(sk))sk++;const tot=rs.reduce((x,y)=>x+y.m,0),mx=Math.max(...a.map(y=>y.m),1);
+const wk=(k,len)=>RS().filter(r=>dyo(r)>=k*len&&dyo(r)<(k+1)*len).reduce((x,y)=>x+y.m,0),ds=Array.from({length:7},(_,i)=>RS().filter(r=>dyo(r)==6-i).reduce((x,y)=>x+y.m,0)),dm=Math.max(...ds,1),w7=300/6;
+return `<div class="cd"><div class="row">${PD.map(p=>`<button class="${st.pd==p[0]?'on':''}" onclick="st.pd='${p[0]}';draw()">${p[1]}</button>`).join('')}</div><div class="li"><span>連続学習日数</span><b>${sk}日</b></div><div class="li"><span>1日あたり平均</span><b>${Math.round(tot/(n>=9999?Math.max(1,Math.max(0,...RS().map(dyo))+1):n))}分</b></div><div class="li"><span>期間の合計</span><b>${tot}分</b></div></div>
+<div class="cd"><div class="row">${[['pie','円'],['bar','棒'],['line','折れ線']].map(x=>`<button class="${st.ch==x[0]?'on':''}" onclick="st.ch='${x[0]}';draw()">${x[1]}</button>`).join('')}</div>${st.ch=='pie'?`<div style="text-align:center">${pie(a)}</div>`:st.ch=='line'?`<svg viewBox="-10 -10 330 130" width="100%"><polyline fill="none" stroke="${COL[0]}" stroke-width="2" points="${ds.map((v,i)=>`${i*w7},${100-v/dm*100}`).join(' ')}"/>${ds.map((v,i)=>`<circle cx="${i*w7}" cy="${100-v/dm*100}" r="3" fill="${COL[0]}"/><text x="${i*w7}" y="118" font-size="9" text-anchor="middle" fill="#888">${6-i?'-'+(6-i):'今'}</text>`).join('')}</svg>`:''}${a.map((x,i)=>st.ch=='bar'?`<div class="br"><span>${x.s}</span><span class="bar" style="height:14px"><i style="width:${x.m/mx*100}%"></i></span><b>${x.m}分</b></div>`:`<div class="li"><span style="color:${COL[i%4]}">●&nbsp;${x.s}</span><b>${x.m}分</b></div>`).join('')||'<p class="mu">この期間の記録はありません</p>'}<small>折れ線は直近7日の合計です。</small></div>
+<div class="cd"><b>週別・月別</b><table class="tb"><tr><th>期間<th>時間</tr>${[0,1,2,3].map(k=>`<tr><td>${k?k+'週前':'今週'}<td>${wk(k,7)}分`).join('')}${[0,1,2].map(k=>`<tr><td>${k?k+'か月前':'今月'}<td>${wk(k,30)}分`).join('')}</table></div>
+<div class="cd"><b>分野別の時間と理解度</b><table class="tb"><tr><th>分野<th>時間<th>理解度<th>状態</tr>${a.map(x=>{const p=Math.round(x.u/5*100);return `<tr><td>${x.s}<td>${x.m}分<td>${p}%<td>${p>=75?'順調':p>=60?'継続':p>=45?'復習したい':'基礎を固めたい'}</tr>`}).join('')}</table><small>理解度は自己評価です。</small></div>`};
+
+// ---------- 料理型 ----------
+const GN={A:'料理の基礎',B:'味の仕組み',C:'加熱の仕組み',D:'食材の理解',E:'基本調理技術',F:'家庭料理の実践',G:'応用',H:'発展'};
+const UN={A:'調理器具の使い方,包丁の基本,食材の洗浄と下処理,計量の方法,調味料の基本,衛生管理,食材の保存,レシピの読み方',B:'五つの基本味,味のバランス,塩を加えるタイミング,だしとうま味,香りと味の関係,油脂が料理に与える影響,調味料の組み合わせ,味見と味の調整',C:'火加減の考え方,フライパンと鍋の使い分け,焼く・炒める・煮る・蒸す・揚げるの違い,食材の水分と加熱,肉や魚の加熱による変化,卵の加熱による変化,野菜の加熱による変化,焦げ目と焼き色,加熱時間と仕上がり',D:'肉類,魚介類,卵,野菜,米,小麦粉,豆類,乳製品,油脂,調味料',E:'切る,混ぜる,こねる,焼く,炒める,煮る,蒸す,揚げる,ゆでる,炊く,味を調える',F:'ご飯の炊き方,味噌汁,卵料理,野菜炒め,生姜焼き,ハンバーグ,オムライス,親子丼,肉じゃが,カレー,チャーハン,魚料理,基本的な副菜,一汁三菜の献立',G:'レシピの比較,失敗の原因分析,味や食感の改善,食材の代替,余った食材の活用,栄養バランス,食材費の管理,献立作成,複数の料理を効率よく仕上げる,レシピを見ずに作る',H:'和食・洋食・中華の特徴,ソースやたれの仕組み,だしやスープの応用,食材の組み合わせ,調理条件による味の変化,自分でレシピを考える,料理の再現性を高める'};
+const SG=[['ステージ1 道具と下処理に慣れる','A','安全に切る・量る・保存できる','約3週'],['ステージ2 味と火の原理','BC','塩加減と火加減を理由つきで調整できる','約6〜8週'],['ステージ3 食材と基本技術','DE','食材ごとの扱いと基本技術を使い分けられる','約8週'],['ステージ4 家庭料理の実践','F','定番の家庭料理を、見ずに近い形で作れる','約8〜10週'],['ステージ5 応用と発展','GH','失敗を直し、自分で調整・考案できる','約12週〜']];
+const U=[];Object.keys(UN).forEach(k=>UN[k].split(',').forEach(n=>U.push({k,n,t:k=='F'?n:n+'を意識して普段の料理を作る',q:n+'を自分の言葉で説明できる？'})));
+const LV=['未学習','読んだ','説明できる','調理で使えた','応用できた'],RD=['基本どおりに作る','火加減・加熱時間に注目','下ごしらえ・混ぜ方に注目','失敗の原因を分析して改善','学んだ知識で自分で調整'];
+const lv=i=>(D.level||[]).find(x=>x.id=='u'+i)||{l:0,a:'',r:[0,0,0,0,0]};
+const stg=i=>SG.findIndex(s=>s[1].includes(U[i].k));
+const setLv=w(async(i,k,a,r)=>{const c=lv(i);await put('level',{id:'u'+i,l:k==null?c.l:k,a:a==null?c.a:a,r:r||c.r});draw()});
+const tglR=(i,j)=>{const r=lv(i).r.slice();r[j]^=1;setLv(i,null,null,r)};
+const detail=i=>{const u=U[i],c=lv(i);return `<div style="width:100%" onclick="event.stopPropagation()">${[['目的',u.n+'を理解し、料理で使えるようになる'],['前提',i?U[i-1].n:'なし'],['学ぶ内容','本の該当箇所を読み、自分の言葉でメモ（内容は推測しません）'],['実践課題',u.t],['費用・時間','普段の食事の範囲 ・ 知識15〜30分＋実践'],['確認質問',u.q],['修了条件','Lv3（実際に調理で使えた）'],['次の単元',U[i+1]?U[i+1].n:'—']].map(x=>`<div class="li"><span>${x[0]}</span><small>${E(x[1])}</small></div>`).join('')}<b style="display:block;margin-top:6px">自分の言葉で答える</b><div class="ed"><textarea id="ua" rows="2">${E(c.a)}</textarea><button onclick="setLv(${i},null,Q('ua'))">回答を保存</button></div><b class="mu" style="display:block">${E(c.a)}</b><b style="display:block">実践課題（回ごとの目的）</b>${RD.map((t,j)=>`<label><input type="checkbox" ${c.r[j]?'checked':''} onchange="tglR(${i},${j})">第${j+1}回：${t}</label>`).join('')}<div class="row ed" style="margin-top:6px">${LV.map((v,k)=>`<button class="${c.l==k?'on':''}" onclick="setLv(${i},${k})">${k}</button>`).join('')}</div><small>0未学習 1読んだ 2説明できる 3調理で使えた 4応用できた</small></div>`};
+const CV={};
+CV.unit=()=>`<small>5つのステージは仮案です。単元の細かい中身は、本を確認して登録した内容に合わせて直します。</small>`+SG.map((s,si)=>{const us=U.map((u,i)=>[u,i]).filter(x=>stg(x[1])==si),p=Math.round(us.reduce((a,x)=>a+lv(x[1]).l,0)/us.length/4*100);return `<div class="cd"><div class="li" style="border:0;cursor:pointer" onclick="st.os=st.os==${si}?-1:${si};draw()"><b>${s[0]}</b><b>${p}%</b><small>到達目標：${s[2]} ／ 目安：${s[3]} ／ 修了条件：全単元がLv3以上</small></div><span class="bar"><i style="width:${p}%"></i></span>${st.os==si?[...s[1]].map(k=>`<div class="mu" style="margin-top:8px">${GN[k]}</div>${us.filter(x=>x[0].k==k).map(([u,i])=>`<div class="li" onclick="st.op=st.op==${i}?-1:${i};draw()" style="cursor:pointer"><span>${E(u.n)}</span><b>Lv${lv(i).l} ${LV[lv(i).l]}</b>${st.op==i?detail(i):''}</div>`).join('')}`).join(''):''}</div>`}).join('');
+CV.home=()=>{const i=U.findIndex((u,j)=>lv(j).l<2),u=U[i<0?0:i],si=stg(i<0?0:i),kn=U.filter((x,j)=>lv(j).l>=2).map(x=>x.n),ds=[...new Set((D.cook||[]).map(x=>x.dish))],last=(D.cook||[]).slice().sort((a,b)=>b.d>a.d?1:-1)[0];return `<div class="cd"><b>現在の学習段階</b>${SG[si][0]}<br><small>到達目標：${SG[si][2]}</small></div><div class="cd"><b>今日やること</b><div style="font-size:18px;font-weight:700">${E(u.n)}</div><p class="mu">目的：原理を理解し、料理で使えるようにする ・ 推奨 20分</p><p>確認質問：${E(u.q)}</p><p class="mu">次に挑戦する料理：${E(u.t)}</p><button class="pri ed" onclick="st.pt='unit';draw(1)">単元を開く</button></div>${last&&last.bad?`<div class="cd"><b>現在の課題や改善点</b>${E(last.bad)}<br><small>次回：${E(last.next)}</small></div>`:''}<div class="cd"><b>習得した知識</b>${kn.map(E).join('、')||'まだありません'}</div><div class="cd"><b>これまでに作った料理</b>${ds.map(E).join('、')||'まだありません'}</div>`};
+const gid=u=>{const m=String(u||'').match(/\/d\/([\w-]+)|[?&]id=([\w-]+)/);return m?(m[1]||m[2]):''};
+const dish=k=>{const c=[['#e7d7a8','#fff'],['#f2c14e','#fff7dd'],['#8a4b2a','#7fb069']][k%3];return `<svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#dfe6e6"/><circle cx="40" cy="42" r="30" fill="#fff" stroke="#c9d1d1"/><circle cx="40" cy="42" r="21" fill="${c[0]}"/><circle cx="34" cy="38" r="8" fill="${c[1]}" opacity=".8"/></svg>`};
+const addCook=w(async()=>{if(!Q('cd'))return;await put('cook',{d:ymd(today()),dish:Q('cd'),ref:Q('cr'),ing:Q('ci'),min:+Q('cm')||0,taste:Q('cf'),good:Q('cg'),bad:Q('cb'),next:Q('cx'),learn:Q('cl'),photo:Q('cp'),cost:+Q('cy')||0});draw();toast('記録しました')});
+CV.cook=()=>{const cs=(D.cook||[]).slice().sort((a,b)=>b.d>a.d?1:-1),mo=ymd(today()).slice(0,7),mc=cs.filter(x=>x.d.slice(0,7)==mo).reduce((a,x)=>a+(x.cost||0),0);return `<div class="cd ed"><b>調理を記録</b><input id="cd" placeholder="作った料理"><input id="cr" placeholder="参照したレシピ・書籍"><input id="ci" placeholder="使用した食材"><div class="row"><input id="cm" type="number" placeholder="調理時間（分）" style="width:48%"><input id="cy" type="number" placeholder="費用（円）" style="width:48%"></div><input id="cf" placeholder="味・食感"><input id="cg" placeholder="うまくできた点"><input id="cb" placeholder="失敗した点"><input id="cx" placeholder="次回改善したいこと"><input id="cl" placeholder="今回学んだこと"><input id="cp" placeholder="写真のURL（Googleドライブの共有リンク）"><button class="pri" onclick="addCook()">記録する</button></div><div class="cd"><b>今月の食費（学習用の調理）</b><div class="big">${mc.toLocaleString()}<small> 円</small></div></div><div class="cd"><b>料理アルバム</b><div class="gr">${cs.map((r,i)=>`<div>${gid(r.photo)?`<img src="https://drive.google.com/thumbnail?id=${gid(r.photo)}&sz=w400" alt="">`:dish(i)}<small>${E(r.dish)}</small></div>`).join('')||'<p class="mu">まだありません</p>'}</div></div><div class="cd"><b>調理の履歴</b>${cs.map(r=>`<div class="li"><span>${E(r.dish)}</span><b>${r.min}分 ・ ${(r.cost||0).toLocaleString()}円</b><small>${E(r.d)} ／ 参照：${E(r.ref||'-')} ／ 食材：${E(r.ing||'-')} ／ 味・食感：${E(r.taste||'-')}<br>良かった：${E(r.good||'-')} ／ 失敗：${E(r.bad||'-')} ／ 次回：${E(r.next||'-')} ／ 学び：${E(r.learn||'-')}</small></div>`).join('')}</div>`};
+boot();
+</script></body></html>
