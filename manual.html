@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5F7F86">
+<title>Kani Study マニュアル</title>
+<meta name="description" content="Kani Study のはじめ方と使い方">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#5F7F86;--pink-d:#43626A;--petal:#E3ECEC;--blush:#F4F6F6;--line:#D2DDDD;--ink:#26333A;--sub:#6C7C80;--card:#fff;--head:#5F7F86;--head-ink:#fff;--ok:#2F7D5B;--warn:#B5532F}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--pink:#8FB3BA;--pink-d:#B7D3D8;--petal:#22313A;--blush:#121A1F;--line:#2A3A42;--ink:#E6ECEE;--sub:#9DADB2;--card:#19242A;--head:#1E3238;--head-ink:#F1F6F7;--ok:#7FD1A8;--warn:#F0A27F}}
+:root[data-theme="dark"]{--pink:#8FB3BA;--pink-d:#B7D3D8;--petal:#22313A;--blush:#121A1F;--line:#2A3A42;--ink:#E6ECEE;--sub:#9DADB2;--card:#19242A;--head:#1E3238;--head-ink:#F1F6F7;--ok:#7FD1A8;--warn:#F0A27F}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Hiragino Kaku Gothic ProN',sans-serif;background:var(--blush);color:var(--ink);font-size:15px;line-height:1.75}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 60px}
+header{background:var(--head);color:var(--head-ink);padding:calc(env(safe-area-inset-top,0px) + 28px) 20px 34px;position:relative}
+header .in{max-width:640px;margin:0 auto}
+header .brand{font-size:13px;font-weight:700;opacity:.85;letter-spacing:.04em}
+header h1{font-size:26px;font-weight:900;margin:4px 0 6px;letter-spacing:.02em}
+header p{margin:0;font-size:14px;opacity:.9}
+header::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:10px;background:radial-gradient(circle at 6px 10px,var(--blush) 5px,transparent 5.5px) 0 0/12px 10px repeat-x}
+.i{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav.toc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin:22px 0 8px}
+nav.toc h2{font-size:13px;color:var(--sub);margin:0 0 6px;font-weight:700}
+nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:20px}
+nav.toc li{font-size:14px;break-inside:avoid}
+nav.toc a{color:var(--ink);text-decoration:none}
+@media (max-width:420px){nav.toc ol{columns:1}}
+section{margin-top:30px}
+section>h2{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:900;margin:0 0 12px}
+section>h2 .ic{width:38px;height:38px;border-radius:12px;background:var(--petal);color:var(--pink-d);display:grid;place-items:center;flex-shrink:0}
+h3{font-size:15px;font-weight:700;margin:18px 0 6px}
+p{margin:6px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin:10px 0}
+.steps{list-style:none;counter-reset:s;padding:0;margin:8px 0}
+.steps li{counter-increment:s;position:relative;padding:2px 0 12px 40px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;background:var(--pink);color:var(--card);font-weight:700;font-size:14px;display:grid;place-items:center}
+.steps li:not(:last-child)::after{content:'';position:absolute;left:13.5px;top:32px;bottom:2px;width:1px;background:var(--line)}
+.steps b{display:block}
+.note{display:flex;gap:10px;align-items:flex-start;background:var(--petal);border-radius:14px;padding:12px 14px;margin:10px 0;font-size:14px}
+.note .i{color:var(--pink-d);margin-top:3px}
+.note a{color:var(--pink-d);font-weight:700}
+.warn{background:color-mix(in srgb,var(--warn) 12%,var(--card))}
+.warn .i{color:var(--warn)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.grid{grid-template-columns:1fr}}
+.grid .card{margin:0}
+.grid .card b{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.grid .card b .i{color:var(--pink-d)}
+.small{font-size:13px;color:var(--sub)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--petal);color:var(--pink-d);vertical-align:1px}
+dl{margin:0}
+dt{font-weight:700;margin-top:14px;display:flex;gap:8px}
+dt::before{content:'Q';color:var(--pink-d);font-weight:900}
+dd{margin:4px 0 0 18px}
+.cta{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--pink);color:var(--card);border-radius:14px;padding:14px;font-weight:700;text-decoration:none;margin-top:14px}
+footer{text-align:center;color:var(--sub);font-size:12px;margin-top:40px}
+kbd{font-family:inherit;font-size:13px;font-weight:700;background:var(--petal);border-radius:6px;padding:1px 7px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></symbol>
+  <symbol id="share" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></symbol>
+  <symbol id="folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M8 7h7"/></symbol>
+  <symbol id="pot" viewBox="0 0 24 24"><path d="M4 10h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M2 10h20"/><path d="M10 7h4"/></symbol>
+  <symbol id="timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M10 2h4"/></symbol>
+  <symbol id="chart" viewBox="0 0 24 24"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></symbol>
+  <symbol id="people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14a6.5 6.5 0 0 1 3.5 6"/></symbol>
+  <symbol id="palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.8 2-2 0-.6-.3-1-.6-1.4-.3-.4-.6-.8-.6-1.4 0-1.2.9-2 2-2h2.4A4.8 4.8 0 0 0 21 9.6C21 6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="15" cy="7" r="1.2"/></symbol>
+  <symbol id="bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+  <symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9"/><path d="M17 6l3 3"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14"/><path d="M12 17.5v.01"/></symbol>
+  <symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><path d="M12 7.5v.01"/></symbol>
+  <symbol id="alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5"/><path d="M12 18v.01"/></symbol>
+  <symbol id="target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></symbol>
+  <symbol id="flame" viewBox="0 0 24 24"><path d="M12 21a6 6 0 0 0 6-6c0-4-3-6-4-10-1.5 2-2 3.5-2 5-1-1-1.5-2-1.5-3C8 9 6 11.5 6 15a6 6 0 0 0 6 6z"/></symbol>
+  <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></symbol>
+  <symbol id="camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+</svg>
+
+<header><div class="in">
+  <div class="brand">Kani Study</div>
+  <h1>マニュアル</h1>
+  <p>学んだことを記録して、フレンドと応援しあう学習アプリです。はじめの5分で読める順にまとめました。</p>
+</div></header>
+
+<div class="wrap">
+<nav class="toc" aria-label="目次"><h2>目次</h2><ol>
+  <li><a href="#start">はじめる</a></li>
+  <li><a href="#project">プロジェクトを作る</a></li>
+  <li><a href="#study">学習モデルの毎日</a></li>
+  <li><a href="#cook">料理モデルの進め方</a></li>
+  <li><a href="#friend">フレンドと応援</a></li>
+  <li><a href="#skin">着せ替え</a></li>
+  <li><a href="#notice">通知とタイマー</a></li>
+  <li><a href="#rule">記録のきまり</a></li>
+  <li><a href="#device">機種変更</a></li>
+  <li><a href="#faq">困ったとき</a></li>
+</ol></nav>
+
+<section id="start">
+  <h2><span class="ic"><svg class="i"><use href="#home"/></svg></span>はじめる</h2>
+  <p>招待リンクを受け取ったら、iPhoneのSafariで開いて、次の順に進めます。</p>
+  <ol class="steps">
+    <li><b>招待リンクをSafariで開く</b>LINEなどで開いた場合は、右下のメニューから「Safariで開く」を選びます。</li>
+    <li><b>共有ボタンから「ホーム画面に追加」</b>画面下の <svg class="i" style="display:inline;vertical-align:-4px;width:18px;height:18px"><use href="#share"/></svg> をタップし、「ホーム画面に追加」を選びます。</li>
+    <li><b>ホーム画面のアイコンから開き直す</b>ここからがアプリとしての本番です。ブラウザのまま使うと、データが別になってしまいます。</li>
+    <li><b>表示名を入れて「アカウントを作成」</b>招待コードは自動で入っています。作成と同時に、招待してくれた人とフレンドになります。</li>
+  </ol>
+  <div class="note"><svg class="i"><use href="#info"/></svg><div>パスワードはありません。この端末がそのままアカウントになります。機種変更のときは「<a href="#device">機種変更</a>」の手順で引き継ぎます。</div></div>
+</section>
+
+<section id="project">
+  <h2><span class="ic"><svg class="i"><use href="#folder"/></svg></span>プロジェクトを作る</h2>
+  <p>学ぶテーマごとに「プロジェクト」を作ります。プロジェクトタブの「新しいプロジェクトを作る」から、2つのモデルのどちらかを選びます。</p>
+  <div class="grid">
+    <div class="card"><b><svg class="i"><use href="#book"/></svg>学習モデル</b><span class="small">タイマー・記録・分析・小テスト・復習がそろっています。本の目次を、そのまま学習のカテゴリーにできます。</span></div>
+    <div class="card"><b><svg class="i"><use href="#pot"/></svg>料理モデル</b><span class="small">本で読んだコツと、実際に作った料理を、目次の上でつなげて記録します。写真つきの料理アルバムもあります。</span></div>
+  </div>
+  <h3>本を見て学ぶ・独学で学ぶ</h3>
+  <p>プロジェクトを開くと、進め方を選びます。</p>
+  <div class="grid">
+    <div class="card"><b><svg class="i"><use href="#book"/></svg>本を見て学ぶ</b><span class="small">本の目次が、そのまま学習のカテゴリー（料理モデルでは目次）になります。どの章にどれだけ時間を使ったか、どこまで読んだかが分かります。</span></div>
+    <div class="card"><b><svg class="i"><use href="#pencil"/></svg>独学で学ぶ</b><span class="small">カテゴリーを自分で作ります。科目 → テーマのように、階層にできます。</span></div>
+  </div>
+  <div class="note"><svg class="i"><use href="#chat"/></svg><div>使いたい本が一覧にないときは、本を選ぶ画面の「運営に頼む」から書名を送ってください。運営が目次を登録すると、一覧から選べるようになります。</div></div>
+  <p class="small">フレンドのプロジェクトも一覧に並びます。<span class="tag">閲覧のみ</span> と出ているものは、見ることと応援することだけできます。</p>
+</section>
+
+<section id="study">
+  <h2><span class="ic"><svg class="i"><use href="#timer"/></svg></span>学習モデルの毎日</h2>
+  <ol class="steps">
+    <li><b>押すだけで始める</b>ホームの大きなボタンで前回と同じ時間・セットが始まります。タイマーのタブでは、10分・25分などの時間か、「勉強25分→休憩5分→勉強25分」のようなセットを押すだけで始まります。</li>
+    <li><b>終わると時間を記録</b>勉強が終わると時間が記録され、休憩に切り替わります。途中でやめるときは「終了」を長押しします（うっかり押しても止まりません）。実際に学んだ分だけ記録され、休憩は学習時間に入りません。</li>
+    <li><b>終わってから「何を勉強した？」</b>セットが全部終わったら、目次から何を勉強したかを選び、理解度を入れます。あとで登録しても大丈夫です。ホームに未登録の件数が出ます。</li>
+    <li><b>レポートで見る</b>分析タブの「レポート」で、今日・今月・累計と、章ごとの時間（積み上げ棒と円）が分かります。週末は「週の振り返り」も見てみましょう。</li>
+  </ol>
+  <h3>そのほかの機能（学習タブ・分析タブ）</h3>
+  <div class="grid">
+    <div class="card"><b><svg class="i"><use href="#chart"/></svg>分析</b><span class="small">円・棒・折れ線などのグラフで、学習の偏りや伸びが分かります。</span></div>
+    <div class="card"><b><svg class="i"><use href="#help"/></svg>小テスト</b><span class="small">自分で問題を作り、間違えた問題から優先して出題されます。</span></div>
+    <div class="card"><b><svg class="i"><use href="#target"/></svg>目標</b><span class="small">1日・1週間の学習時間などを決めると、ホームに進み具合が出ます。</span></div>
+    <div class="card"><b><svg class="i"><use href="#book"/></svg>ロードマップ</b><span class="small">学ぶ順番を並べて、どこまで進んだかを管理します。</span></div>
+  </div>
+</section>
+
+<section id="cook">
+  <h2><span class="ic"><svg class="i"><use href="#pot"/></svg></span>料理モデルの進め方</h2>
+  <ol class="steps">
+    <li><b>次に読む項目を読む</b>ホームの「次に読む」に、目次の順でまだ読んでいない項目が出ます。</li>
+    <li><b>「読んだ」を押して、分かったことを残す</b>読んだ時間と、分かったことを自分の言葉で短く書きます。</li>
+    <li><b>作ってみたら「作ってみた」</b>使ったコツ（目次の項目）を選んで、作った料理・時間・費用・よかったこと・次に直すことを残します。</li>
+    <li><b>写真を貼る</b>写真をGoogleドライブに入れ、共有を「リンクを知っている全員」にしてリンクを貼ると、アルバムと目次に表示されます。</li>
+  </ol>
+  <div class="note"><svg class="i"><use href="#info"/></svg><div>目次タブでは、項目ごとに「未読・読んだ・作ってみた」が分かります。読むだけで終わらせず、作ってみるところまでつなげましょう。</div></div>
+</section>
+
+<section id="friend">
+  <h2><span class="ic"><svg class="i"><use href="#people"/></svg></span>フレンドと応援</h2>
+  <p>フレンドになると、お互いのプロジェクトを見て応援できます。設定の「招待リンク」を送るか、相手のフレンドコードを入力して追加します。</p>
+  <div class="grid">
+    <div class="card"><b><svg class="i"><use href="#timer"/></svg>いま勉強中</b><span class="small">タイマーで勉強しているあいだ、フレンドの画面に「いま勉強中」と残り時間が出ます。休憩・一時停止・終了で消えます。「がんばれ」で応援できます。</span></div>
+    <div class="card"><b><svg class="i"><use href="#chat"/></svg>スタンプとひとこと</b><span class="small">「フレンドの最近の活動」の記録ごとに、スタンプか30字までのひとことを送れます。届いた応援は、自分のプロジェクトのホームに出ます。</span></div>
+    <div class="card"><b><svg class="i"><use href="#target"/></svg>2人の共通目標</b><span class="small">フレンドごとに「今週2人で合計○時間」を決められます。2人の学習時間と調理時間を合計し、毎週月曜に0から始まります。</span></div>
+    <div class="card"><b><svg class="i"><use href="#camera"/></svg>プロフィール画像</b><span class="small">設定のプロフィールに、Googleドライブの写真の共有リンクを貼ります。共有は「リンクを知っている全員」にします。</span></div>
+  </div>
+</section>
+
+<section id="skin">
+  <h2><span class="ic"><svg class="i"><use href="#palette"/></svg></span>着せ替え</h2>
+  <p>着せ替えタブで、この端末の見た目を変えられます。色だけの着せ替えと、絵のある着せ替え（星空の図書館・ひだまりの台所・海辺のカニ・いぬとねこ）があります。絵のある着せ替えは、イラストが追加されると自動で本番の絵に切り替わります。</p>
+  <p class="small">着せ替えは端末ごとの設定です。フレンドの画面には影響しません。</p>
+</section>
+
+<section id="notice">
+  <h2><span class="ic"><svg class="i"><use href="#bell"/></svg></span>通知とタイマー</h2>
+  <p>設定の「通知をオンにする」を押して許可すると、画面をロックしていてもタイマーの終わりが通知で届きます。iOS 16.4以降の、ホーム画面に追加したアプリで使えます。</p>
+  <div class="note"><svg class="i"><use href="#info"/></svg><div>サーバーが1分おきに確認するため、通知は最大1分ほど遅れることがあります。アプリを開いているあいだは、音とバナーですぐにお知らせします。</div></div>
+  <h3>通知が使えないとき（ショートカット連携）</h3>
+  <ol class="steps">
+    <li><b>「ショートカット」アプリで新規作成</b></li>
+    <li><b>「入力から数字を取得」を追加</b>表記はiOSのバージョンで少し違うことがあります。</li>
+    <li><b>「タイマーを開始」を追加</b>時間を「数字」の分にします。</li>
+    <li><b>名前を「学習タイマー」にする</b></li>
+    <li><b>アプリの設定で「iPhoneのタイマーも同時にセット」をオン</b>開始すると、時計アプリのタイマーも同時にセットされます。</li>
+  </ol>
+</section>
+
+<section id="rule">
+  <h2><span class="ic"><svg class="i"><use href="#lock"/></svg></span>記録のきまり</h2>
+  <div class="note warn"><svg class="i"><use href="#alert"/></svg><div><b>14日を過ぎた記録は閲覧のみになります。</b>学習記録・小テストの結果・調理記録・読んだ記録は、14日を過ぎると保管用の場所へ移ります。グラフや履歴には残りますが、編集や削除はできません。記録は14日以内の日付で入れてください。</div></div>
+  <p>電波がないときも記録できます。つながったときに自動で保存されます。画面右上の丸い印が、保存の状態を表します。</p>
+</section>
+
+<section id="device">
+  <h2><span class="ic"><svg class="i"><use href="#key"/></svg></span>機種変更</h2>
+  <ol class="steps">
+    <li><b>今の端末で「引き継ぎコード」を発行</b>設定の「引き継ぎ」から発行します。コードは24時間有効です。</li>
+    <li><b>新しい端末でアプリを開き、作成画面でコードを入力</b>「引き継いで入る」を押すと、記録もフレンドもそのまま使えます。</li>
+  </ol>
+  <p class="small">端末をなくした場合は、管理者に引き継ぎコードを発行してもらえます。</p>
+</section>
+
+<section id="faq">
+  <h2><span class="ic"><svg class="i"><use href="#help"/></svg></span>困ったとき</h2>
+  <dl>
+    <dt>表示が古い、ボタンが反応しない</dt><dd>設定の「表示を最新にする」を押すと、この端末に残っている古い表示を消して読み込み直します。記録は消えません。</dd>
+    <dt>フレンドのプロジェクトが出てこない</dt><dd>プロジェクトタブを開き直すと、最新の状態になります。フレンドがまだプロジェクトを作っていないこともあります。</dd>
+    <dt>写真やプロフィール画像が出ない</dt><dd>Googleドライブの共有が「リンクを知っている全員」になっているか確認してください。</dd>
+    <dt>通知が届かない</dt><dd>ホーム画面のアイコンから開いているか、iPhoneの設定で通知が許可されているかを確認し、設定の「テスト通知」で試してください。</dd>
+    <dt>ほしい機能がある</dt><dd>ご意見タブから送ってください。対応状況もそこで確認できます。</dd>
+  </dl>
+  <a class="cta" href="./"><svg class="i"><use href="#home"/></svg>アプリを開く</a>
+</section>
+
+<footer>Kani Study</footer>
+</div>
+</body>
+</html>
